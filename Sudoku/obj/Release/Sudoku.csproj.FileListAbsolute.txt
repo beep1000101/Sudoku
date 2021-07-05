@@ -1,0 +1,7 @@
+C:\Users\matip\Documents\Projects\C#\Sudoku\Sudoku\bin\Release\Sudoku.exe.config
+C:\Users\matip\Documents\Projects\C#\Sudoku\Sudoku\bin\Release\Sudoku.exe
+C:\Users\matip\Documents\Projects\C#\Sudoku\Sudoku\bin\Release\Sudoku.pdb
+C:\Users\matip\Documents\Projects\C#\Sudoku\Sudoku\obj\Release\Sudoku.csproj.AssemblyReference.cache
+C:\Users\matip\Documents\Projects\C#\Sudoku\Sudoku\obj\Release\Sudoku.csproj.CoreCompileInputs.cache
+C:\Users\matip\Documents\Projects\C#\Sudoku\Sudoku\obj\Release\Sudoku.exe
+C:\Users\matip\Documents\Projects\C#\Sudoku\Sudoku\obj\Release\Sudoku.pdb
