@@ -25,6 +25,7 @@ namespace Sudoku {
         /// </summary>
         private void InitializeComponent() {
             this.labelTitle = new System.Windows.Forms.Label();
+            this.button_solve = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // labelTitle
@@ -39,12 +40,24 @@ namespace Sudoku {
             this.labelTitle.Text = "Sudoku Deluxe Solver";
             this.labelTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // button_solve
+            // 
+            this.button_solve.FlatAppearance.BorderSize = 0;
+            this.button_solve.Location = new System.Drawing.Point(700, 83);
+            this.button_solve.Name = "button_solve";
+            this.button_solve.Size = new System.Drawing.Size(75, 23);
+            this.button_solve.TabIndex = 1;
+            this.button_solve.Text = "Solve";
+            this.button_solve.UseVisualStyleBackColor = true;
+            this.button_solve.Click += new System.EventHandler(this.button_solve_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            this.ClientSize = new System.Drawing.Size(944, 441);
+            this.ClientSize = new System.Drawing.Size(944, 451);
+            this.Controls.Add(this.button_solve);
             this.Controls.Add(this.labelTitle);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1";
@@ -59,5 +72,6 @@ namespace Sudoku {
         #endregion
 
         private System.Windows.Forms.Label labelTitle;
+        private System.Windows.Forms.Button button_solve;
     }
 }

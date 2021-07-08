@@ -32,7 +32,8 @@ namespace Table {
 
     class SudokuTable {
 
-        private byte[,] numbers;
+        //private byte[,] numbers;
+        public byte[,] numbers;
         private bool[,] isFixed;
         private byte heightOfTable;
         private byte lengthOfTable;
@@ -50,15 +51,15 @@ namespace Table {
             //                             { 0, 0, 0, 6, 0, 9, 5, 8, 2 } };
 
 
-            this.numbers = new byte[,] { { 3, 2, 0, 7, 0, 4, 0, 0, 0 },
-                                         { 6, 4, 0, 0, 9, 0, 0, 0, 7 },
-                                         { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-                                         { 0, 0, 0, 0, 4, 5, 9, 0, 0 },
-                                         { 0, 0, 5, 1, 8, 7, 4, 0, 0 },
-                                         { 0, 0, 4, 9, 6, 0, 0, 0, 0 },
-                                         { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-                                         { 2, 0, 0, 0, 7, 0, 0, 1, 9 },
-                                         { 0, 0, 0, 6, 0, 9, 5, 8, 2 } };
+            //this.numbers = new byte[,] { { 3, 2, 0, 7, 0, 4, 0, 0, 0 },
+            //                             { 6, 4, 0, 0, 9, 0, 0, 0, 7 },
+            //                             { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            //                             { 0, 0, 0, 0, 4, 5, 9, 0, 0 },
+            //                             { 0, 0, 5, 1, 8, 7, 4, 0, 0 },
+            //                             { 0, 0, 4, 9, 6, 0, 0, 0, 0 },
+            //                             { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            //                             { 2, 0, 0, 0, 7, 0, 0, 1, 9 },
+            //                             { 0, 0, 0, 6, 0, 9, 5, 8, 2 } };
 
             //this.numbers = new byte[,] { {3, 0, 6, 5, 0, 8, 4, 0, 0},
             //                             {5, 2, 0, 0, 0, 0, 0, 0, 0},
@@ -69,6 +70,16 @@ namespace Table {
             //                             {1, 3, 0, 0, 0, 0, 2, 5, 0},
             //                             {0, 0, 0, 0, 0, 0, 0, 7, 4},
             //                             {0, 0, 5, 2, 0, 6, 3, 0, 0} };
+
+            this.numbers = new byte[,] { {1, 2, 3, 0, 0, 0, 0, 0, 0},
+                                         {4, 5, 6, 0, 0, 0, 0, 0, 0},
+                                         {7, 8, 9, 0, 0, 0, 0, 0, 0},
+                                         {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                         {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                         {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                         {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                         {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                         {0, 0, 0, 0, 0, 0, 0, 0, 0} };
 
 
 
@@ -135,21 +146,21 @@ namespace Table {
             }
         }
 
-        public bool CheckRows(byte column, byte row, byte candidate) {
+        private bool CheckRows(byte column, byte row, byte candidate) {
             for (byte rowCheck = 0; rowCheck < this.lengthOfTable; rowCheck++)
                 if (this.numbers[column, rowCheck] == candidate)
                     return false;
             return true;
         }
 
-        public bool CheckColumns(byte column, byte row, byte candidate) {
+        private bool CheckColumns(byte column, byte row, byte candidate) {
             for (byte columnCheck = 0; columnCheck < this.heightOfTable; columnCheck++)
                 if (this.numbers[columnCheck, row] == candidate)
                     return false;
             return true;
         }
 
-        public bool CheckSquare(byte column, byte row, byte candidate) {
+        private bool CheckSquare(byte column, byte row, byte candidate) {
             for (byte squareColumn = 0; squareColumn < 3; squareColumn++)
                 for (byte squareRow = 0; squareRow < 3; squareRow++) {
                     byte properSquareColumn = (byte)(column - column % 3 + squareColumn);
@@ -160,22 +171,35 @@ namespace Table {
             return true;
         }
 
-        public bool IsThisPossible(byte column, byte row, byte candidate) {
+        private bool IsThisPossible(byte column, byte row, byte candidate) {
             bool columnBoolValue = CheckColumns(column, row, candidate);
-            bool rowBoolValue = CheckRows(column, row, candidate);
+            bool rowBoolValue    = CheckRows(column, row, candidate);
             bool squareBoolValue = CheckSquare(column, row, candidate);
             return columnBoolValue && rowBoolValue && squareBoolValue;
         }
 
-        public void NormalBacktrackingSolve() {
+        private bool IsThisComplete() {
+            for (byte column = 0; column < this.lengthOfTable; column++)
+                for (byte row = 0; row < this.heightOfTable; row++)
+                    if (this.numbers[column, row] == 0)
+                        return false;
+            return true;                        
+        }
+
+        public void NormalBacktrackingSolve(Int32 sleep) {
             for (byte column = 0; column < this.heightOfTable; column++) {
                 for (byte row = 0; row < this.lengthOfTable; row++) {
                     if (this.numbers[column, row] == 0) {
                         for(byte candidate = 1; candidate < 10; candidate++) {
                             if (IsThisPossible(column, row, candidate)) {
-                                SetValue(column, row, candidate);
-                                NormalBacktrackingSolve();
-                                SetValue(column, row, 0);
+                                //SetValue(column, row, candidate); 
+                                this.numbers[column, row] = candidate;
+                                System.Threading.Thread.Sleep(sleep);
+                                NormalBacktrackingSolve(sleep);
+                                //SetValue(column, row, 0);
+                                if(!IsThisComplete())
+                                    this.numbers[column, row] = 0;
+                                System.Threading.Thread.Sleep(sleep);
                             }
                         }
                         return;
@@ -183,7 +207,9 @@ namespace Table {
                 }
             }
             PrintTable();
-            Console.WriteLine("\n\n\n");
+            return;
+            //Console.WriteLine("\n\n\n");
+            //return;
         }
     }
 
