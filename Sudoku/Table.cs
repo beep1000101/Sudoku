@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Table {
 
     class SudokuMember {
@@ -197,8 +198,9 @@ namespace Table {
                                 System.Threading.Thread.Sleep(sleep);
                                 NormalBacktrackingSolve(sleep);
                                 //SetValue(column, row, 0);
-                                if(!IsThisComplete())
-                                    this.numbers[column, row] = 0;
+                                if (!IsThisComplete()) {
+                                    this.numbers[column, row] = 0;                               
+                                }
                                 System.Threading.Thread.Sleep(sleep);
                             }
                         }
@@ -206,10 +208,8 @@ namespace Table {
                     }
                 }
             }
-            PrintTable();
-            return;
+            //PrintTable();
             //Console.WriteLine("\n\n\n");
-            //return;
         }
     }
 

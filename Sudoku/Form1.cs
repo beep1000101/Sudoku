@@ -15,17 +15,11 @@ namespace Sudoku {
         const byte n = 3, labelSize = 50;
         private byte[,] sudokuMember = new byte[n * n, n * n];
         private SudokuTable sudokuTable = new SudokuTable();
-        //SudokuTable sudokuTable = new SudokuTable();
         private Label[,] label = new Label[n * n, n * n];
-        //private byte[,] sudokuMember = SudokuTable.numbers;
 
         public Form1() {
             InitializeComponent();
-            //UpdateMap();
-            //sudokuTable.SetValue(0, 1, 1);
             GenerateMap();
-            //Console.ReadKey();
-            //UpdateMap();
         }
 
         private void Form1_Load(object sender, EventArgs e) {
@@ -44,8 +38,6 @@ namespace Sudoku {
             for (byte column = 0; column < n * n; column++)
                 for (byte row = 0; row < n * n; row++) {
                     sudokuMember[column, row] = sudokuTable.PrintValue(column, row);
-                    //if(sudokuMember[column,row]==0)
-                    //    sudokuMember[column, row] = 6;
                     if (sudokuMember[column, row]==0)
                         label[column, row].Text = String.Empty;
                     else {
@@ -73,28 +65,18 @@ namespace Sudoku {
         private void CreateMap() {
             for (byte column = 0; column < n * n; column++)
                 for (byte row = 0; row < n * n; row++) {
-                    //Label label = new Label();
                     label[column, row] = new Label();
-                    //label.Size = new Size(labelSize, labelSize);
                     label[column, row].Size = new Size(labelSize, labelSize);
                     if (sudokuMember[column, row] == 0)
                         label[column, row].Text = String.Empty;
-                      //label.Text = String.Empty;
                     else
                         label[column, row].Text = sudokuMember[column, row].ToString();
-                    //label.Text = sudokuMember[column, row].ToString();
-                    //label.Location  = new Point(row * labelSize, column * labelSize);
-                    //label.Font      = new Font("Arial", 16);
-                    //label.ForeColor = System.Drawing.Color.White;
-                    //label.TextAlign = ContentAlignment.MiddleCenter;
-                    //label.BackColor = System.Drawing.Color.Transparent;
                     label[column, row].Location = new Point(row * labelSize, column * labelSize);
                     label[column, row].Font = new Font("Arial", 16);
                     label[column, row].ForeColor = System.Drawing.Color.White;
                     label[column, row].TextAlign = ContentAlignment.MiddleCenter;
                     label[column, row].BackColor = System.Drawing.Color.Transparent;
                     this.Controls.Add(label[column, row]);
-                    //this.Controls.Add(label);
                 }
         }
 
@@ -129,7 +111,5 @@ namespace Sudoku {
         private void button_solve_Click(object sender, EventArgs e) {
             UpdateMap();
         }
-
-
     }
 }
